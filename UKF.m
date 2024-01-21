@@ -41,9 +41,9 @@ chi(:, 2:1:(dim_in+1))          = x + sqrt((L*lambda))*chol(P); % chol is for th
 chi(:, (dim_in+2):1:2*dim_in+1) = x - sqrt((L*lambda))*chol(P); % chol is for the sqrt of a matrix
 % \\ loop over all sigma points to predict the state using the BDFT_Discrete function
 for k = 1:2*dim_in+1 
-    [f,~,~,~] = BDFT_Discrete(chi(:, k),u,t); 
+    [f,~,~,~] = Function_estimation(chi(:, k),u,t); 
     chi(:, k) = f;      
-    [~,~,h,~] = BDFT_Discrete(f,u,t); 
+    [~,~,h,~] = Function_estimation(f,u,t); 
     yepsilon(:, k) = h; 
 end
 % \\  predict the state and output mean by taking the weighted sum of the sigma points
